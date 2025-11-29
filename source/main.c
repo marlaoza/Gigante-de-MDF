@@ -393,6 +393,20 @@ ISR(USART_RX_vect){
 			if(SPEED < 0){
 				SPEED = 0;
 			}
+		}else if(dataUSART == 'h'){
+			writeUSART("--COMANDOS--\n");
+			writeUSART("f | mover frente\n");
+			writeUSART("b | mover tras\n");
+			writeUSART("l | mover esquerda\n");
+			writeUSART("r | mover direita\n");
+			writeUSART("p | parar motores\n");
+			writeUSART("m | laser manual\n");
+			writeUSART("s | atirar laser manual\n");
+			writeUSART("a | laser automatico [PADRAO]\n");
+			writeUSART("0 | giro 180\n");
+			writeUSART("1 | avanço\n");
+			writeUSART("3 | resetar\n");
+			writeUSART("+ / - | ajustar velocidade \n");
 		}
 	}
 	
