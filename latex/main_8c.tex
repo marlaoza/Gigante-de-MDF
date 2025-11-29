@@ -1,0 +1,341 @@
+\doxysection{main.\+c File Reference}
+\hypertarget{main_8c}{}\label{main_8c}\index{main.c@{main.c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$util/delay.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}\label{main_8c_a43bafb28b29491ec7f871319b5a3b2f8} 
+\#define {\bfseries F\+\_\+\+CPU}~16000000\+UL
+\begin{DoxyCompactList}\small\item\em Valor do CLOCK da CPU. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a75cb54bcebb299263826f33304ad9265}\label{main_8c_a75cb54bcebb299263826f33304ad9265} 
+\#define {\bfseries SEG\+\_\+A}~PB5
+\item 
+\Hypertarget{main_8c_a62bb65e0fd3cae8fe6bb8ca3f45b8d42}\label{main_8c_a62bb65e0fd3cae8fe6bb8ca3f45b8d42} 
+\#define {\bfseries SEG\+\_\+B}~PC1
+\item 
+\Hypertarget{main_8c_a41810fa14a326fc41468571948dc09c4}\label{main_8c_a41810fa14a326fc41468571948dc09c4} 
+\#define {\bfseries SEG\+\_\+C}~PC2
+\item 
+\Hypertarget{main_8c_ab408360fd13aeefc34520d9464407419}\label{main_8c_ab408360fd13aeefc34520d9464407419} 
+\#define {\bfseries SEG\+\_\+D}~PC3
+\item 
+\Hypertarget{main_8c_af88257e7e5371478adfbb6d72366d7a1}\label{main_8c_af88257e7e5371478adfbb6d72366d7a1} 
+\#define {\bfseries SEG\+\_\+E}~PC5
+\item 
+\Hypertarget{main_8c_abf85b76890259838df0ca7462c415848}\label{main_8c_abf85b76890259838df0ca7462c415848} 
+\#define {\bfseries SEG\+\_\+G}~PC4
+\item 
+\Hypertarget{main_8c_a9fa6f083fd9b05ac8a6b94f34322661e}\label{main_8c_a9fa6f083fd9b05ac8a6b94f34322661e} 
+\#define {\bfseries LDR}~PC0
+\item 
+\Hypertarget{main_8c_a7ec8393e9445109104fd54119e06fc08}\label{main_8c_a7ec8393e9445109104fd54119e06fc08} 
+\#define {\bfseries LASER}~PD5
+\item 
+\Hypertarget{main_8c_acf59cc2c2015737f006876736aa67a52}\label{main_8c_acf59cc2c2015737f006876736aa67a52} 
+\#define {\bfseries MOTOR1\+\_\+A}~PB2
+\item 
+\Hypertarget{main_8c_a910ad8b79b5f2ccd1024d8d46d18db59}\label{main_8c_a910ad8b79b5f2ccd1024d8d46d18db59} 
+\#define {\bfseries MOTOR1\+\_\+B}~PB3
+\item 
+\Hypertarget{main_8c_a1b942ae1310c124145c8a7c8d486db33}\label{main_8c_a1b942ae1310c124145c8a7c8d486db33} 
+\#define {\bfseries MOTOR1\+\_\+\+PWM}~PD6
+\item 
+\Hypertarget{main_8c_a10d9dc2baccb61a1ff9ec726e6d8925f}\label{main_8c_a10d9dc2baccb61a1ff9ec726e6d8925f} 
+\#define {\bfseries MOTOR2\+\_\+A}~PB0
+\item 
+\Hypertarget{main_8c_a96c25b04428137f29a841f7109a924df}\label{main_8c_a96c25b04428137f29a841f7109a924df} 
+\#define {\bfseries MOTOR2\+\_\+B}~PD7
+\item 
+\Hypertarget{main_8c_a0fcb1011ecb6d47a95a3ef79cd288b7d}\label{main_8c_a0fcb1011ecb6d47a95a3ef79cd288b7d} 
+\#define {\bfseries MOTOR2\+\_\+\+PWM}~PB1
+\item 
+\Hypertarget{main_8c_a0272d814b1a09a8eb6511318febe3826}\label{main_8c_a0272d814b1a09a8eb6511318febe3826} 
+\#define {\bfseries TIME\+\_\+180}~200
+\begin{DoxyCompactList}\small\item\em Tempo necessário para a volta de 180 graus. (em ms). \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a34901744643d83cff09d9e727d652613}\label{main_8c_a34901744643d83cff09d9e727d652613} 
+\#define {\bfseries RX\+\_\+\+COMPLETE\+\_\+\+INTERRUPT}~(1$<$$<$RXCIE0)
+\item 
+\Hypertarget{main_8c_a5d8a218998fd7a223d3a907ea2a16a81}\label{main_8c_a5d8a218998fd7a223d3a907ea2a16a81} 
+\#define {\bfseries DATA\+\_\+\+REGISTER\+\_\+\+EMPTY\+\_\+\+INTERRUPT}~(1$<$$<$UDRIE0)
+\item 
+\Hypertarget{main_8c_a0f80e758504093c7a4ad6a2f03dca9eb}\label{main_8c_a0f80e758504093c7a4ad6a2f03dca9eb} 
+\#define {\bfseries LASEROVERFLOWS}~62
+\begin{DoxyCompactList}\small\item\em Valor necessário de overflows para timer de 1.\+01 segundos. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_aa3d51a5b2e2f0230c8596408a964e102}\label{main_8c_aa3d51a5b2e2f0230c8596408a964e102} 
+\#define {\bfseries max\+Life}~3
+\begin{DoxyCompactList}\small\item\em Valor máximo de vidas. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a52d1225092b1f6d624fb219ecb7d1b0f}\label{main_8c_a52d1225092b1f6d624fb219ecb7d1b0f} 
+\#define {\bfseries LDR\+\_\+\+THRESHOLD}~900
+\begin{DoxyCompactList}\small\item\em Valor mínimo de detecção do LDR. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8c_a11fdda93ffc5c981f0e96d972f65fd9d}{set\+Bit}} (volatile uint8\+\_\+t \texorpdfstring{$\ast$}{*}port, uint8\+\_\+t bit, uint8\+\_\+t value)
+\item 
+void \mbox{\hyperlink{main_8c_a280241753f4a0dd95120a19faa8494f2}{setup\+USART}} (uint32\+\_\+t value)
+\item 
+void \mbox{\hyperlink{main_8c_a8678855112cc7afd943a34b9f9a64559}{send\+Byte\+USART}} (uint8\+\_\+t Data\+Byte)
+\item 
+void \mbox{\hyperlink{main_8c_ac727172e4fc219fb8fab11caf3d08e3a}{write\+USART}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}str)
+\item 
+void \mbox{\hyperlink{main_8c_ab003fa8d991f012095e004b6e9d729a7}{setup\+Motors\+Pwm}} ()
+\item 
+void \mbox{\hyperlink{main_8c_aacea78a29b4d1d7a45f395c472284bf1}{set\+Motor1}} (uint8\+\_\+t pinA, uint8\+\_\+t pinB, uint8\+\_\+t cycle)
+\item 
+void \mbox{\hyperlink{main_8c_a59e3d8a543871c2732f89c4a45aa8a3a}{set\+Motor2}} (uint8\+\_\+t pinA, uint8\+\_\+t pinB, uint8\+\_\+t cycle)
+\item 
+void \mbox{\hyperlink{main_8c_a8fd656f5258403d0cf14a869fad9d86d}{setup\+Laser\+Timer}} ()
+\item 
+\mbox{\hyperlink{main_8c_a7cfcbe42bd266750aeb6e5d71e5ea479}{ISR}} (TIMER2\+\_\+\+OVF\+\_\+vect)
+\item 
+void \mbox{\hyperlink{main_8c_aa3912aa6df5e81d539cf9f0709cb765f}{shoot}} ()
+\item 
+void \mbox{\hyperlink{main_8c_a13ee2855717b7f2765142c6362473f18}{update\+Life}} ()
+\item 
+void \mbox{\hyperlink{main_8c_a4219fa21765083266972a7de4b2dabe5}{remove\+Life}} ()
+\item 
+void \mbox{\hyperlink{main_8c_a333cf77c1bcac15ce042e8a8de73eab1}{reset\+Life}} ()
+\item 
+void \mbox{\hyperlink{main_8c_a823993b1d47cd88ec002226cbb45ff29}{setup\+ADC}} ()
+\item 
+uint16\+\_\+t \mbox{\hyperlink{main_8c_a1202dca577f673604816abd4f250a7a6}{read\+LDR}} ()
+\item 
+void \mbox{\hyperlink{main_8c_a60de64d75454385b23995437f1d72669}{start}} ()
+\item 
+\mbox{\hyperlink{main_8c_a09ce999e15ad60b8a3f07d08af1946f9}{ISR}} (USART\+\_\+\+RX\+\_\+vect)
+\item 
+int \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8c_a321f56e9e77670ef4357fd2fac109e89}\label{main_8c_a321f56e9e77670ef4357fd2fac109e89} 
+uint8\+\_\+t {\bfseries alive} = 1
+\begin{DoxyCompactList}\small\item\em Flag que determina se o gigante esta vivo. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a52c99903aeb24336693ca32035cc2ae6}\label{main_8c_a52c99903aeb24336693ca32035cc2ae6} 
+uint8\+\_\+t {\bfseries debug} = 0
+\begin{DoxyCompactList}\small\item\em Flag que determina se o modo de depuração está ativo. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_ada99b38cbfa653297f6e4ff2daac9346}\label{main_8c_ada99b38cbfa653297f6e4ff2daac9346} 
+uint8\+\_\+t {\bfseries laser\+Cooldown} = 0
+\begin{DoxyCompactList}\small\item\em Flag que determina se o laser esta em cooldown (não pode ser ativado). \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a5a28f50e37c449a2611bd6391e990536}\label{main_8c_a5a28f50e37c449a2611bd6391e990536} 
+uint8\+\_\+t {\bfseries laser\+Auto} = 1
+\begin{DoxyCompactList}\small\item\em Flag que controla o modo do motor (1 -\/ AUTO, 2 -\/ MANUAL). \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a77f2d863dcbba3378f384b35b75622e6}\label{main_8c_a77f2d863dcbba3378f384b35b75622e6} 
+volatile uint16\+\_\+t {\bfseries laser\+Counter} = 0
+\begin{DoxyCompactList}\small\item\em Contador de overflows do Timer do Motor. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a5694338c1bcb4455072af4179913d44d}\label{main_8c_a5694338c1bcb4455072af4179913d44d} 
+uint8\+\_\+t {\bfseries life} = 3
+\begin{DoxyCompactList}\small\item\em Valor atual de vidas. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \mbox{\hyperlink{main_8c_af9a05193da56d61350f9602f9ce30491}{life\+Display}} \mbox{[}$\,$\mbox{]}
+\begin{DoxyCompactList}\small\item\em Lista com a configuração do led de 7 segmentos para cada número de vidas. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a03fe4605425aef04f4dad440784dbf45}\label{main_8c_a03fe4605425aef04f4dad440784dbf45} 
+int {\bfseries SPEED} = 200
+\begin{DoxyCompactList}\small\item\em Valor da velocidade do carrinho. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_abb2121f4a82952f874c58aa05c31bb81}\label{main_8c_abb2121f4a82952f874c58aa05c31bb81} 
+volatile uint8\+\_\+t {\bfseries data\+USART}
+\begin{DoxyCompactList}\small\item\em Byte que guarda a mensagem que vai ser lida pelo USART. \end{DoxyCompactList}\item 
+\Hypertarget{main_8c_a4b92294b4e82a7d875de15a7c2f804b3}\label{main_8c_a4b92294b4e82a7d875de15a7c2f804b3} 
+char {\bfseries buffer} \mbox{[}6\mbox{]}
+\begin{DoxyCompactList}\small\item\em Buffer 6 bytes para guardar valor lido do LDR convertido para String. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{main_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8c_a7cfcbe42bd266750aeb6e5d71e5ea479}\index{main.c@{main.c}!ISR@{ISR}}
+\index{ISR@{ISR}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ISR()}{ISR()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{main_8c_a7cfcbe42bd266750aeb6e5d71e5ea479} 
+ISR (\begin{DoxyParamCaption}\item[{TIMER2\+\_\+\+OVF\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+Interrupção de controle do Timer2 Quando laser\+Counter for maior ou igual a LASEROVERFLOWS um segundo se passou Controla o laser, caso em modo automático, ligando e desligando intercaladamente Caso em modo manual, desligando após um segundo e configurando o
+\begin{DoxyParams}{Parameters}
+{\em laser\+Cooldown} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a09ce999e15ad60b8a3f07d08af1946f9}\index{main.c@{main.c}!ISR@{ISR}}
+\index{ISR@{ISR}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ISR()}{ISR()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{main_8c_a09ce999e15ad60b8a3f07d08af1946f9} 
+ISR (\begin{DoxyParamCaption}\item[{USART\+\_\+\+RX\+\_\+vect}]{}{}\end{DoxyParamCaption})}
+
+Interrupção que lida com as mensagens do USART, interpretando os dados para controlar o robô \Hypertarget{main_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+Função de Entrada \Hypertarget{main_8c_a1202dca577f673604816abd4f250a7a6}\index{main.c@{main.c}!readLDR@{readLDR}}
+\index{readLDR@{readLDR}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{readLDR()}{readLDR()}}
+{\footnotesize\ttfamily \label{main_8c_a1202dca577f673604816abd4f250a7a6} 
+uint16\+\_\+t read\+LDR (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Aguarda a conversão e retorna a leitura do conversor analógico digital para o pino PC0 \begin{DoxyReturn}{Returns}
+leitura do pino PC0 de 10 bits (0–1023) 
+\end{DoxyReturn}
+\Hypertarget{main_8c_a4219fa21765083266972a7de4b2dabe5}\index{main.c@{main.c}!removeLife@{removeLife}}
+\index{removeLife@{removeLife}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{removeLife()}{removeLife()}}
+{\footnotesize\ttfamily \label{main_8c_a4219fa21765083266972a7de4b2dabe5} 
+void remove\+Life (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Remove uma vida e realiza a rotina de perda de vida (rodar 180 graus e desativar por 5 segundos) Caso não existam mais vidas para remover, desliga os motores e seta
+\begin{DoxyParams}{Parameters}
+{\em alive} & para 0 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a333cf77c1bcac15ce042e8a8de73eab1}\index{main.c@{main.c}!resetLife@{resetLife}}
+\index{resetLife@{resetLife}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{resetLife()}{resetLife()}}
+{\footnotesize\ttfamily \label{main_8c_a333cf77c1bcac15ce042e8a8de73eab1} 
+void reset\+Life (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Recarrega as vidas para o valor máximo e seta
+\begin{DoxyParams}{Parameters}
+{\em alive} & para 1 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a8678855112cc7afd943a34b9f9a64559}\index{main.c@{main.c}!sendByteUSART@{sendByteUSART}}
+\index{sendByteUSART@{sendByteUSART}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{sendByteUSART()}{sendByteUSART()}}
+{\footnotesize\ttfamily \label{main_8c_a8678855112cc7afd943a34b9f9a64559} 
+void send\+Byte\+USART (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{Data\+Byte}{}\end{DoxyParamCaption})}
+
+Envia um byte por meio do USART 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em Data\+Byte} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a11fdda93ffc5c981f0e96d972f65fd9d}\index{main.c@{main.c}!setBit@{setBit}}
+\index{setBit@{setBit}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{setBit()}{setBit()}}
+{\footnotesize\ttfamily \label{main_8c_a11fdda93ffc5c981f0e96d972f65fd9d} 
+void set\+Bit (\begin{DoxyParamCaption}\item[{volatile uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{port}{, }\item[{uint8\+\_\+t}]{bit}{, }\item[{uint8\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+Seta um valor a um bit específicio limpando esse bit e fazendo uma comparação OR com o valor dado 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}port} & \\
+\hline
+\mbox{\texttt{in}}  & {\em bit} & \\
+\hline
+\mbox{\texttt{in}}  & {\em value} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_aacea78a29b4d1d7a45f395c472284bf1}\index{main.c@{main.c}!setMotor1@{setMotor1}}
+\index{setMotor1@{setMotor1}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{setMotor1()}{setMotor1()}}
+{\footnotesize\ttfamily \label{main_8c_aacea78a29b4d1d7a45f395c472284bf1} 
+void set\+Motor1 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pinA}{, }\item[{uint8\+\_\+t}]{pinB}{, }\item[{uint8\+\_\+t}]{cycle}{}\end{DoxyParamCaption})}
+
+Seta os valores do Pino A, Pino B e o duty cycle do PWM para o Motor 1 pinA e pinB controlam a direção (1 0 frente, 0 1 traz) e o freio (0 0 para, 1 1 para) Duty cicle controla a velocidade do motor 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pinA} & \\
+\hline
+\mbox{\texttt{in}}  & {\em pinB} & \\
+\hline
+\mbox{\texttt{in}}  & {\em cycle} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a59e3d8a543871c2732f89c4a45aa8a3a}\index{main.c@{main.c}!setMotor2@{setMotor2}}
+\index{setMotor2@{setMotor2}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{setMotor2()}{setMotor2()}}
+{\footnotesize\ttfamily \label{main_8c_a59e3d8a543871c2732f89c4a45aa8a3a} 
+void set\+Motor2 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pinA}{, }\item[{uint8\+\_\+t}]{pinB}{, }\item[{uint8\+\_\+t}]{cycle}{}\end{DoxyParamCaption})}
+
+Seta os valores do Pino A, Pino B e o duty cycle do PWM para o Motor 2 pinA e pinB controlam a direção (1 0 frente, 0 1 traz) e o freio (0 0 para, 1 1 para) Duty cicle controla a velocidade do motor 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em pinA} & \\
+\hline
+\mbox{\texttt{in}}  & {\em pinB} & \\
+\hline
+\mbox{\texttt{in}}  & {\em cycle} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a823993b1d47cd88ec002226cbb45ff29}\index{main.c@{main.c}!setupADC@{setupADC}}
+\index{setupADC@{setupADC}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{setupADC()}{setupADC()}}
+{\footnotesize\ttfamily \label{main_8c_a823993b1d47cd88ec002226cbb45ff29} 
+void setup\+ADC (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Configura e inicia o conversor analógico digital \Hypertarget{main_8c_a8fd656f5258403d0cf14a869fad9d86d}\index{main.c@{main.c}!setupLaserTimer@{setupLaserTimer}}
+\index{setupLaserTimer@{setupLaserTimer}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{setupLaserTimer()}{setupLaserTimer()}}
+{\footnotesize\ttfamily \label{main_8c_a8fd656f5258403d0cf14a869fad9d86d} 
+void setup\+Laser\+Timer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Configura e inicializa o Timer2 \Hypertarget{main_8c_ab003fa8d991f012095e004b6e9d729a7}\index{main.c@{main.c}!setupMotorsPwm@{setupMotorsPwm}}
+\index{setupMotorsPwm@{setupMotorsPwm}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{setupMotorsPwm()}{setupMotorsPwm()}}
+{\footnotesize\ttfamily \label{main_8c_ab003fa8d991f012095e004b6e9d729a7} 
+void setup\+Motors\+Pwm (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Configura e inicializa o PWM com Fast\+PWM Motor 1 -\/ TIMER 0 PORTA A (PD6) Motor 2 -\/ TIMER 1 PORTA A (PB1) \Hypertarget{main_8c_a280241753f4a0dd95120a19faa8494f2}\index{main.c@{main.c}!setupUSART@{setupUSART}}
+\index{setupUSART@{setupUSART}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{setupUSART()}{setupUSART()}}
+{\footnotesize\ttfamily \label{main_8c_a280241753f4a0dd95120a19faa8494f2} 
+void setup\+USART (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+Configura e inicializa o USART com a BAUD\+\_\+\+RATE fornecida 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em value} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_aa3912aa6df5e81d539cf9f0709cb765f}\index{main.c@{main.c}!shoot@{shoot}}
+\index{shoot@{shoot}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{shoot()}{shoot()}}
+{\footnotesize\ttfamily \label{main_8c_aa3912aa6df5e81d539cf9f0709cb765f} 
+void shoot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Controle de ativação do laser Caso laser\+Cooldown esteja em 0, ativa o laser e reinicia laser\+Counter \Hypertarget{main_8c_a60de64d75454385b23995437f1d72669}\index{main.c@{main.c}!start@{start}}
+\index{start@{start}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \label{main_8c_a60de64d75454385b23995437f1d72669} 
+void start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Função de configuração principal, seta os pinos como saída ou entrada e chama as funções de setup \Hypertarget{main_8c_a13ee2855717b7f2765142c6362473f18}\index{main.c@{main.c}!updateLife@{updateLife}}
+\index{updateLife@{updateLife}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{updateLife()}{updateLife()}}
+{\footnotesize\ttfamily \label{main_8c_a13ee2855717b7f2765142c6362473f18} 
+void update\+Life (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Atualiza o valor do display de 7 segmentos que representa a vida \Hypertarget{main_8c_ac727172e4fc219fb8fab11caf3d08e3a}\index{main.c@{main.c}!writeUSART@{writeUSART}}
+\index{writeUSART@{writeUSART}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{writeUSART()}{writeUSART()}}
+{\footnotesize\ttfamily \label{main_8c_ac727172e4fc219fb8fab11caf3d08e3a} 
+void write\+USART (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{str}{}\end{DoxyParamCaption})}
+
+Envia uma string ou cadeia de bytes completa por meio do USART 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em str} & \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-var-members}
+\Hypertarget{main_8c_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8c_af9a05193da56d61350f9602f9ce30491}\index{main.c@{main.c}!lifeDisplay@{lifeDisplay}}
+\index{lifeDisplay@{lifeDisplay}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{lifeDisplay}{lifeDisplay}}
+{\footnotesize\ttfamily \label{main_8c_af9a05193da56d61350f9602f9ce30491} 
+const uint8\+\_\+t life\+Display\mbox{[}$\,$\mbox{]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \{}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ 0b00000000,}
+\DoxyCodeLine{\ \ \ \ 0b00000110,}
+\DoxyCodeLine{\ \ \ \ 0b00111011,}
+\DoxyCodeLine{\ \ \ \ 0b00011111,}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Lista com a configuração do led de 7 segmentos para cada número de vidas. 
+
