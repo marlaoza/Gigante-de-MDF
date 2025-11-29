@@ -48,6 +48,7 @@ Os comandos aceitos são:
 | `3` | Reseta vidas |
 | `!` | Alterna o modo de depuração |
 | `+` / `-` | Ajusta velocidade |
+| `h` | Mostra os comandos |
 
 Os motores são controlados pelo C.I de ponte H L298N, com a velocidade sendo modulada via PWM
 Cada um dos motores tem um Timer diferente (*Timer0* e *Timer1*) controlando sua saida PWM.
